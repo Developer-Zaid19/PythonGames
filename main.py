@@ -34,8 +34,8 @@ ball_speed = [4, -4]
 # Score
 score = 0
 font = pygame.font.SysFont(None, 36)
-brick_sound = pygame.mixer.Sound("collid.wav")
-gameover_sound = pygame.mixer.Sound("collideout.wav")
+brick_sound = pygame.mixer.Sound("Assets/collid.wav")
+gameover_sound = pygame.mixer.Sound("Assets/collideout.wav")
 
 # Brick class
 class Brick:
@@ -60,7 +60,7 @@ for row in range(rows):
         bricks.append(Brick(x, y))
 
 # theme music
-pygame.mixer.music.load("wariyo.mp3")
+pygame.mixer.music.load("Assets/bgmusic.mp3")
 pygame.mixer.music.set_volume(0.2)  # 0.0 se 1.0 tak volume
 pygame.mixer.music.play(-1) # infinite music
 

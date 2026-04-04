@@ -1,0 +1,21 @@
+# Required Asset Files for Realistic Flappy Bird Game
+# Please add the following files to the Assets folder:
+
+bg.png
+bird.png
+pillar_top.png
+pillar_bottom.png
+enemy.png
+energy.png
+intro_banner.png
+game_over_banner.png
+intro_sound.wav
+game_over_sound.wav
+flap_sound.wav
+score_sound.wav
+bg_music.wav
+
+# Existing files (you can rename or replace if needed):
+# bgmusic.mp3
+# collid.wav
+# collideout.wav

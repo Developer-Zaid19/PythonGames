@@ -30,20 +30,20 @@ SLATE = (134, 145, 176)
 CRIMSON = (255, 74, 110)
 
 ASSETS_DIR = "Assets"
-BG_IMAGE = os.path.join(ASSETS_DIR, "bg.png")
-BIRD_IMAGE = os.path.join(ASSETS_DIR, "bird1.png")
-PIPE_TOP_IMAGE = os.path.join(ASSETS_DIR, "pillar_top1.png")
-PIPE_BOTTOM_IMAGE = os.path.join(ASSETS_DIR, "pillar_bottom1.png")
-ENEMY_IMAGE = os.path.join(ASSETS_DIR, "enemy1.png")
-ENERGY_IMAGE = os.path.join(ASSETS_DIR, "energy1.png")
-INTRO_BANNER = os.path.join(ASSETS_DIR, "intro_banner.png")
-GAME_OVER_BANNER = os.path.join(ASSETS_DIR, "game_over_banner1.png")
+BG_IMAGE = os.path.join(ASSETS_DIR, "Images\\bg-flappy.png")
+BIRD_IMAGE = os.path.join(ASSETS_DIR, "Images\\bird-flappy.png")
+PIPE_TOP_IMAGE = os.path.join(ASSETS_DIR, "Images\\pillar_top-flappy.png")
+PIPE_BOTTOM_IMAGE = os.path.join(ASSETS_DIR, "Images\\pillar_bottom-flappy.png")
+ENEMY_IMAGE = os.path.join(ASSETS_DIR, "Images\\enemy-flappy.png")
+ENERGY_IMAGE = os.path.join(ASSETS_DIR, "Images\\energy.png")
+INTRO_BANNER = os.path.join(ASSETS_DIR, "Images\\intro_banner-flappy.png")
+GAME_OVER_BANNER = os.path.join(ASSETS_DIR, "Images\\gameover-image-flappy.png")
 
-INTRO_SOUND = os.path.join(ASSETS_DIR, "collid.wav")
-GAME_OVER_SOUND = os.path.join(ASSETS_DIR, "collid.wav")
-FLAP_SOUND = os.path.join(ASSETS_DIR, "collid.wav")
-SCORE_SOUND = os.path.join(ASSETS_DIR, "collid.wav")
-BG_MUSIC = os.path.join(ASSETS_DIR, "bgmusic.mp3")
+INTRO_SOUND = os.path.join(ASSETS_DIR, "Musics\\collid.wav")
+GAME_OVER_SOUND = os.path.join(ASSETS_DIR, "Musics\\gameover-flappy.mp3")
+FLAP_SOUND = os.path.join(ASSETS_DIR, "Musics\\jump-flappy.mp3")
+SCORE_SOUND = os.path.join(ASSETS_DIR, "Musics\\collid.wav")
+BG_MUSIC = os.path.join(ASSETS_DIR, "Musics\\bgmusic-flappy.mp3")
 
 
 def clamp(value, minimum, maximum):
@@ -135,7 +135,7 @@ class Pipe:
         top_original = pygame.image.load(PIPE_TOP_IMAGE).convert_alpha()
         bottom_original = pygame.image.load(PIPE_BOTTOM_IMAGE).convert_alpha()
         self.top_image = pygame.transform.smoothscale(top_original, (96, self.top_height))
-        bottom_height = SCREEN_HEIGHT - (self.top_height + self.gap) - 72
+        bottom_height = SCREEN_HEIGHT - (self.top_height + self.gap) 
         self.bottom_image = pygame.transform.smoothscale(bottom_original, (96, bottom_height))
         self.top_rect = self.top_image.get_rect(midbottom=(self.x, self.top_height))
         self.bottom_rect = self.bottom_image.get_rect(midtop=(self.x, self.top_height + self.gap))

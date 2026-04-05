@@ -15,10 +15,10 @@ HEIGHT = 640
 FPS = 60
 
 ASSETS_DIR = "Assets"
-BG_IMAGE = os.path.join(ASSETS_DIR, "bg.png")
-HIT_SOUND = os.path.join(ASSETS_DIR, "collid.wav")
-LOSE_SOUND = os.path.join(ASSETS_DIR, "collideout.wav")
-BG_MUSIC = os.path.join(ASSETS_DIR, "bgmusic.mp3")
+BG_IMAGE = os.path.join(ASSETS_DIR, "Images\\bg.png")
+HIT_SOUND = os.path.join(ASSETS_DIR, "Musics\\collid.wav")
+LOSE_SOUND = os.path.join(ASSETS_DIR, "Musics\\collideout-Break.wav")
+BG_MUSIC = os.path.join(ASSETS_DIR, "Musics\\bgmusic-flappy.mp3")
 
 WHITE = (245, 247, 255)
 BLACK = (12, 16, 30)
@@ -365,8 +365,8 @@ class Game:
                     self.paddle.grow()
                     self.message = "Paddle expanded!"
                 else:
-                    self.score += 75
-                    self.message = "Bonus captured!"
+                    self.lives += 1
+                    self.message = "Life captured!"
                 self.message_timer = FPS
                 self.spawn_particles(powerup.rect.centerx, powerup.rect.centery, powerup.color, 16)
                 self.powerups.remove(powerup)

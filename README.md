@@ -1,86 +1,92 @@
+# Python Game Project
 
-# 🎮 Python Game Project
+## Requirements
 
-## 📌 Requirements
-- Python **3.10** (recommended)
+- Python **3.10** recommended
+- Pygame **2.6.1**
 
----
+## Setup Instructions
 
-## ⚙️ Setup Instructions
+### 1. Clone the repository
 
-### 1️⃣ Clone the repository
 ```bash
 git clone https://github.com/Developer-Zaid19/PythonGames.git
 cd PythonGames
-````
+```
 
----
-
-### 2️⃣ Create Virtual Environment
+### 2. Create Virtual Environment
 
 ```bash
 py -3.10 -m venv venv
 ```
 
----
+### 3. Activate Virtual Environment
 
-### 3️⃣ Activate Virtual Environment
-
-**Windows:**
+Windows:
 
 ```bash
 venv\Scripts\activate
 ```
 
-**Mac/Linux:**
+Mac/Linux:
 
 ```bash
 source venv/bin/activate
 ```
 
----
-
-### 4️⃣ Install Dependencies
+### 4. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## ▶️ Run the Project
+## Run the Arcade Launcher
 
 ```bash
 python main.py
 ```
 
----
+You can also run each game directly:
 
-## 🎨 Customize Assets
-
-If you want to change sounds, or other assets:
-
-👉 Go to the `Assets/` folder
-👉 Replace or edit files as needed
-
----
-
-## 📁 Project Structure
-
+```bash
+python bird_game.py
+python crashbreak_game.py
+python snake_game.py
 ```
+
+## Games
+
+- **Sky Survivor**: A polished flappy-style survival game.
+- **Crash Breaker**: A brick breaker game with powerups.
+- **Neon Snake Rush**: A dark-theme Snake game with random food, self-collision game over, score tracking, and a red 5-second bonus worth +5 points without growing the snake.
+
+## Snake Controls
+
+- Move: Arrow keys or W/A/S/D
+- Start: Space
+- Pause: P
+- Restart after game over: R
+- Quit: Q
+
+## Other Game Controls
+
+- **Sky Survivor**: Space to start/flap, P to pause, R to restart after game over, Q to quit.
+- **Crash Breaker**: Arrow keys or A/D to move, Space to start/launch, P to pause, R to restart after game over, Q to quit.
+
+## Project Structure
+
+```text
 project/
-│── venv/
-│── assets/
-│── main.py
-│── requirements.txt
-│── README.md
+|-- Assets/
+|-- bird_game.py
+|-- crashbreak_game.py
+|-- snake_game.py
+|-- main.py
+|-- requirements.txt
+|-- README.md
 ```
 
----
+## Notes
 
-## 📝 Notes
-
-* Make sure you are using **Python 3.10**
-* Always activate `venv` before running the project
-
----
+- Make sure you are using Python 3.10 or newer.
+- Always activate the virtual environment before running the project.

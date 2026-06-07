@@ -19,6 +19,7 @@ BG_IMAGE = os.path.join(ASSETS_DIR, "Images\\bg.png")
 HIT_SOUND = os.path.join(ASSETS_DIR, "Musics\\collid.wav")
 LOSE_SOUND = os.path.join(ASSETS_DIR, "Musics\\collideout-Break.wav")
 BG_MUSIC = os.path.join(ASSETS_DIR, "Musics\\bgmusic-flappy.mp3")
+GAME_OVER_SOUND = os.path.join(ASSETS_DIR, "Musics\\gameover-flappy.mp3")
 
 WHITE = (245, 247, 255)
 BLACK = (12, 16, 30)
@@ -74,6 +75,7 @@ class Paddle:
         self.width = 150
         self.rect.width = self.width
         self.rect.centerx = WIDTH // 2
+
 
     def update(self):
         keys = pygame.key.get_pressed()
@@ -227,6 +229,8 @@ class Game:
         self.background = pygame.transform.scale(self.background, (WIDTH, HEIGHT))
         self.hit_sound = pygame.mixer.Sound(HIT_SOUND)
         self.lose_sound = pygame.mixer.Sound(LOSE_SOUND)
+        self.game_over_sound = pygame.mixer.Sound(GAME_OVER_SOUND)
+
 
         pygame.mixer.music.load(BG_MUSIC)
         pygame.mixer.music.set_volume(0.18)
@@ -243,7 +247,7 @@ class Game:
         self.level = 1
         self.score = 0
         self.high_score = 0 if full_reset else self.high_score
-        self.lives = 3
+        self.lives = 1
         self.combo = 0
         self.shake_frames = 0
         self.message_timer = 0
@@ -302,6 +306,7 @@ class Game:
             self.high_score = max(self.high_score, self.score)
             self.state = "game_over"
             self.message = "Press R to restart"
+            pygame.mixer.music.pause()
         else:
             self.ball.reset(True, self.paddle)
             self.message = "Life lost. Press SPACE to relaunch"
@@ -427,7 +432,7 @@ class Game:
     def draw_intro(self):
         title = self.title_font.render("CRASH BREAKER", True, WHITE)
         subtitle = self.subtitle_font.render("Fast bricks, sharp rebounds, zero mercy.", True, GOLD)
-        controls = self.small_font.render("Move: Left/Right or A/D   Launch: SPACE", True, WHITE)
+        controls = self.small_font.render("Move: Left/Right or A/D   Launch: SPACE   Pause: P", True, WHITE)
         hint = self.small_font.render("Press SPACE to start", True, SKY)
 
         panel = pygame.Rect(0, 0, 560, 250)
@@ -455,6 +460,19 @@ class Game:
         self.screen.blit(score_text, score_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 12)))
         self.screen.blit(high_score_text, high_score_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 48)))
         self.screen.blit(hint, hint.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 92)))
+        pygame.mixer.music.pause()        
+
+    def draw_pause(self):
+        panel = pygame.Rect(0, 0, 360, 150)
+        panel.center = (WIDTH // 2, HEIGHT // 2)
+        pygame.draw.rect(self.screen, (17, 24, 45), panel, border_radius=26)
+        pygame.draw.rect(self.screen, GOLD, panel, 2, border_radius=26)
+
+        title = self.subtitle_font.render("PAUSED", True, GOLD)
+        hint = self.small_font.render("Press P to continue", True, WHITE)
+
+        self.screen.blit(title, title.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 24)))
+        self.screen.blit(hint, hint.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 28)))
 
     def draw(self):
         self.draw_background()
@@ -481,6 +499,8 @@ class Game:
 
         if self.state == "intro":
             self.draw_intro()
+        elif self.state == "paused":
+            self.draw_pause()
         elif self.state == "game_over":
             self.draw_game_over()
 
@@ -489,12 +509,18 @@ class Game:
     def handle_keydown(self, key):
         if self.state == "intro" and key == pygame.K_SPACE:
             self.start_game()
+        elif key == pygame.K_p and self.state in ("playing", "paused"):
+            self.state = "paused" if self.state == "playing" else "playing"
+            self.message = "Paused" if self.state == "paused" else "Game resumed"
+            self.message_timer = FPS
         elif self.state == "playing" and key == pygame.K_SPACE and self.ball.attached:
             self.ball.launch()
             self.message = "Ball launched!"
             self.message_timer = FPS // 2
         elif self.state == "game_over" and key == pygame.K_r:
             high_score = self.high_score
+            pygame.mixer.music.play()
+
             self.reset()
             self.high_score = high_score
         elif key == pygame.K_q:
